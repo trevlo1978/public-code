@@ -27,6 +27,7 @@ public class GameBoard {
         int boardValue = board[row][col];
         Ship ship = null;
         if (boardValue != WATER) {
+            //Can only be a ship
             ship = shipMap.get(boardValue);
         } else {
             System.out.println("That was a MISS IN THE WATER!");
