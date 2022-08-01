@@ -2,24 +2,19 @@ package org.example.battleships;
 
 import org.example.battleships.utils.Orientation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Ship {
     private int shipLength;
-    private int row[];
-    private int col[];
-    private boolean isHit[];
-    private int numHits;
+    private Map<Coordinate,Boolean> hitMap = new HashMap<>();
 
     public Ship(int rowIndex, int colIndex, int length, Orientation o) {
-        row = new int[length];
-        col = new int[length];
-        isHit = new boolean[length];
-        numHits = 0;
         shipLength = length;
 
         for (int i = 0; i < shipLength; i++) {
-            row[i] = rowIndex;
-            col[i] = colIndex;
-            isHit[i] = false;
+            Coordinate c = new Coordinate(rowIndex,colIndex);
+            hitMap.put(c,false);
             if (o == Orientation.BOW)
                 rowIndex++;
             else
@@ -27,23 +22,20 @@ public class Ship {
         }
     }
 
-    public boolean registerHit(int rowIndex, int colIndex) {
-        for (int i = 0; i < shipLength; i++) {
-            if (row[i] == rowIndex && col[i] == colIndex) {
-                if (!isHit[i]) {
-                    System.out.println("That is a HIT!");
-                    isHit[i] = true;
-                    numHits++;
-                } else {
-                    System.out.println("That is a MISS!");
-                }
-                return true;
+    public void registerHit(int row, int col) {
+        Coordinate c = new Coordinate(row,col);
+        if (hitMap.containsKey(c)) {
+            boolean hit = hitMap.get(c);
+            if (!hit) {
+                System.out.println("That is a HIT!");
+                hitMap.put(c,true);
+            } else {
+                System.out.println("That is a MISS!");
             }
         }
-        return false;
     }
 
     public boolean isSunk() {
-        return (numHits == shipLength) ? true : false;
+        return (!hitMap.containsValue(false)) ? true : false;
     }
 }
