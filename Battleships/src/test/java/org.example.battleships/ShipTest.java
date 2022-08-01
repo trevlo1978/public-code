@@ -13,8 +13,6 @@ import java.nio.file.Paths;
 
 public class ShipTest {
     private String absolutePath;
-    private static final String INGEST_FILE = "ingestfile.txt";
-    private static final String INGEST_FILE_SMALL = "ingestfile-small.txt";
 
     @Before
     public void setUp() throws Exception {
