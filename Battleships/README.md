@@ -12,3 +12,9 @@
 - The purpose of this exercise is to demonstrate program design and code readability with a program that is relatively quick to implement. A pretty user interface is not required.
 
 ### Solution
+- Entry point is the main method of the Battleships class.
+- 2 Gameboard are created 1 for the Human Player and 1 for the Computer Player.
+- The Gameboard was choosen to be a 2D integer array as we are not required to display the board, if this became a requirement a character array could be used in its place (better ability to convey hits, water etc. to the user).
+- Ships are allocated using random co-ordinates and an orientation, each co-ordinate is checked if it fits on the board or intersects another ship. Only then a Ship is created and the board updated. 
+- The Ship class provides a HitMap which keeps track of the damage done to the ship and its sunk status.
+- Each Ship is stored in a Map with the length of the Ship as the key (if Ships of the same length became a requirement we would switch to names).
