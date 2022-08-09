@@ -18,8 +18,8 @@ public class Battleships {
         GameBoard playerBoard = new GameBoard();
         GameBoard computerBoard = new GameBoard();
         //deploy ships
-        //int[] ships = new int[]{2,3,4,5};
-        int[] ships = new int[]{2};
+        int[] ships = new int[]{2,3,4,5};
+        //int[] ships = new int[]{2};
         playerBoard.init(ships);
         computerBoard.init(ships);
 
