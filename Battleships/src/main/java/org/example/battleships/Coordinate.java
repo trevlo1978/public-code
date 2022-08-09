@@ -13,14 +13,6 @@ public class Coordinate {
         this.hashCode = Objects.hash(row, col);
     }
 
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
