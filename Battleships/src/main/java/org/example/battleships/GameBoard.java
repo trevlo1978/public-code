@@ -7,6 +7,7 @@ import org.example.battleships.utils.Orientation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class GameBoard {
     int[][] board = new int[Battleships.BOARD_SIZE][Battleships.BOARD_SIZE];
@@ -69,13 +70,14 @@ public class GameBoard {
     }
 
     private boolean canPlaceShip(int row, int col, int shipLength, Orientation ori) {
+        Predicate<Orientation> isBow = i -> (i == Orientation.BOW);
         //Check OOB
-        if (ori == Orientation.BOW) {
+        if (isBow.test(ori)) {
             if (row + shipLength > board.length - 1) return false;
         } else if (col + shipLength > board.length - 1) return false;
 
         //Check for ship intersection
-        if (ori == Orientation.BOW) {
+        if (isBow.test(ori)) {
             for (int i = row; i < shipLength + row; i++) {
                 if (board[i][col] > 0) return false;
             }
@@ -88,8 +90,9 @@ public class GameBoard {
     }
 
     private Ship placeShip(int row, int col, int shipLength, Orientation ori) {
+        Predicate<Orientation> isBow = i -> (i == Orientation.BOW);
         for (int i = 0; i < shipLength; i++) {
-            if (ori == Orientation.BOW) {
+            if (isBow.test(ori)) {
                 board[row + i][col] = shipLength;
             } else {
                 board[row][col + i] = shipLength;
