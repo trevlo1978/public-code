@@ -1,5 +1,8 @@
 package org.example.battleships;
 
+import org.example.battleships.players.ComputerPlayer;
+import org.example.battleships.players.HumanPlayer;
+import org.example.battleships.players.Player;
 import org.example.battleships.utils.GameUtils;
 
 import java.util.Random;
@@ -7,73 +10,40 @@ import java.util.Scanner;
 
 public class Battleships {
     public static int BOARD_SIZE = 10;
-    GameBoard playerBoard;
-    GameBoard computerBoard;
+    Player humanPlayer;
+    Player computerPlayer;
 
     public void startGame() {
         //setup boards
-        playerBoard = new GameBoard();
-        computerBoard = new GameBoard();
+        GameBoard playerBoard = new GameBoard();
+        GameBoard computerBoard = new GameBoard();
         //deploy ships
         int[] ships = new int[]{2,3,4,5};
         playerBoard.init(ships);
         computerBoard.init(ships);
+
+        humanPlayer = new HumanPlayer(computerBoard, BOARD_SIZE);
+        computerPlayer = new ComputerPlayer(playerBoard, BOARD_SIZE);
 
         playGame();
     }
 
     private void playGame() {
         while (!gameOver()) {
-            playerTurn();
-            computerTurn();
+            humanPlayer.takeTurn();
+            computerPlayer.takeTurn();
         }
     }
 
     private boolean gameOver() {
-        if (computerBoard.shipsLeft() == 0) {
-            System.out.println("Player Wins!");
+        if (humanPlayer.gameOver()) {
+            System.out.println("Human Player Wins!");
             return true;
-        } else if (playerBoard.shipsLeft() == 0) {
-            System.out.println("Computer Wins!");
+        } else if (computerPlayer.gameOver()) {
+            System.out.println("Computer Player Wins!");
             return true;
         }
         return false;
-    }
-
-    private void playerTurn(){
-        System.out.println("\nPLAYER TURN");
-        String X;
-        int col = -1;
-        int row = -1;
-        do {
-            Scanner input = new Scanner(System.in);
-            // X axis is the columns
-            System.out.print("Enter X coordinate (A-J): ");
-            X = input.next();
-            col = GameUtils.convertAlpha(X);
-            // Y axis is the rows
-            System.out.print("Enter Y coordinate (1-10): ");
-            row = input.nextInt();
-            row -= 1;
-
-            if ((col >= 0 && col < BOARD_SIZE) && (row >= 0 && row < BOARD_SIZE)) {
-                computerBoard.processAttack(row,col);
-            }
-            else if ((col < 0 || col >= BOARD_SIZE) || (row < 0 || row >= BOARD_SIZE))
-                System.out.println("You can't place ships outside the " + BOARD_SIZE + " by " + BOARD_SIZE + " grid");
-        } while ((col < 0 || col >= BOARD_SIZE) || (row < 0 || row >= BOARD_SIZE));
-    }
-
-    public void computerTurn() {
-        System.out.println("\nCOMPUTER TURN");
-
-        Random rn = new Random();
-        int row = rn.nextInt(Battleships.BOARD_SIZE);
-        int col = rn.nextInt(Battleships.BOARD_SIZE);
-
-        if ((col >= 0 && col < BOARD_SIZE) && (row >= 0 && row < BOARD_SIZE)) {
-            playerBoard.processAttack(row,col);
-        }
     }
 
     public static void main(String[] args) {
