@@ -3,9 +3,7 @@ package org.example.battleships;
 import org.example.battleships.players.ComputerPlayer;
 import org.example.battleships.players.HumanPlayer;
 import org.example.battleships.players.Player;
-import org.example.battleships.utils.GameUtils;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Battleships {
@@ -37,10 +35,10 @@ public class Battleships {
     }
 
     private boolean gameOver() {
-        if (humanPlayer.gameOver()) {
+        if (humanPlayer.isGameOver()) {
             System.out.println("Human Player Wins!");
             return true;
-        } else if (computerPlayer.gameOver()) {
+        } else if (computerPlayer.isGameOver()) {
             System.out.println("Computer Player Wins!");
             return true;
         }

@@ -29,7 +29,7 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public boolean gameOver() {
+    public boolean isGameOver() {
         return gameBoard.shipsLeft() == 0;
     }
 }
