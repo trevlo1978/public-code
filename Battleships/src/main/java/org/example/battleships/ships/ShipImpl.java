@@ -1,15 +1,17 @@
-package org.example.battleships;
+package org.example.battleships.ships;
 
+import org.example.battleships.Coordinate;
+import org.example.battleships.ships.Ship;
 import org.example.battleships.utils.Orientation;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Ship {
+public class ShipImpl implements Ship {
     private int shipLength;
     private Map<Coordinate,Boolean> hitMap = new HashMap<>();
 
-    public Ship(int rowIndex, int colIndex, int length, Orientation o) {
+    public ShipImpl(int rowIndex, int colIndex, int length, Orientation o) {
         shipLength = length;
 
         for (int i = 0; i < shipLength; i++) {

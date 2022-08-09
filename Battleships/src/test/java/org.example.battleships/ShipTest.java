@@ -1,12 +1,12 @@
 package org.example.battleships;
 
+import org.example.battleships.ships.ShipImpl;
 import org.example.battleships.utils.Orientation;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +22,7 @@ public class ShipTest {
 
     @Test
     public void sinkNewBowShip() {
-        Ship ship = new Ship(0,0,2, Orientation.BOW);
+        ShipImpl ship = new ShipImpl(0,0,2, Orientation.BOW);
 
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
@@ -41,7 +41,7 @@ public class ShipTest {
 
     @Test
     public void sinkNewPortShip() {
-        Ship ship = new Ship(0,0,2, Orientation.PORT);
+        ShipImpl ship = new ShipImpl(0,0,2, Orientation.PORT);
 
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
@@ -60,7 +60,7 @@ public class ShipTest {
 
     @Test
     public void missNewPortShip() {
-        Ship ship = new Ship(0,0,2, Orientation.PORT);
+        ShipImpl ship = new ShipImpl(0,0,2, Orientation.PORT);
 
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));

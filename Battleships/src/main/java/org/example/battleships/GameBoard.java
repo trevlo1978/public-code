@@ -1,5 +1,7 @@
 package org.example.battleships;
 
+import org.example.battleships.ships.Ship;
+import org.example.battleships.ships.ShipImpl;
 import org.example.battleships.utils.Orientation;
 
 import java.util.HashMap;
@@ -93,6 +95,6 @@ public class GameBoard {
                 board[row][col + i] = shipLength;
             }
         }
-        return new Ship(row, col, shipLength, ori);
+        return new ShipImpl(row, col, shipLength, ori);
     }
 }
